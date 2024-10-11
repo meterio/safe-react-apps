@@ -5,7 +5,7 @@ orbs:
 jobs:
   build_and_deploy_staging:
     docker:
-      - image: "cimg/node:16.17"
+      - image: "cimg/node:18.18.0"
     steps:
       - checkout
       - run:
@@ -25,7 +25,7 @@ jobs:
             - node_modules
       - run:
           name: production build
-          command: yarn build
+          command: yarn build-tx-builder
       - run:
           name: s3 sync
           command: aws s3 sync ./apps/tx-builder/build/ s3://staging-meter-io/ --delete
